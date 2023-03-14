@@ -16,8 +16,17 @@ val event4 = Event(title = "Practice Compose", daypart = Daypart.AFTERNOON, dura
 val event5 = Event(title = "Watch latest DevBytes video", daypart = Daypart.AFTERNOON, durationInMinutes = 10)
 val event6 = Event(title = "Check out latest Android Jetpack library", daypart = Daypart.EVENING, durationInMinutes = 45)
 
+val Event.durationOfEvent: String
+   	get() = if (this.durationInMinutes < 60) {
+   	   	"short"
+   	} else {
+       	"long"
+    }
+        
 fun main() {
     val events = mutableListOf<Event>(event1, event2, event3, event4, event5, event6)
+    val shortEvents = events.filter {it.durationInMinutes < 60}
+    val groupedEvents = events.groupBy {it.daypart}
 	events.forEach{  
 	println("Title: ${it.title}")
     println("Description: ${it.description}")
@@ -25,4 +34,10 @@ fun main() {
     println("Duration in minutes: ${it.durationInMinutes}")
     println(" ")
     }
+    println("You have ${shortEvents.size} short events.")
+    groupedEvents.forEach { (daypart, events) ->
+    println("$daypart: ${events.size} events")
+    }
+    println("Last event of the day: ${events.last().title}")
+    println("Duration of first event of the day: ${events[0].durationOfEvent}")
 }
