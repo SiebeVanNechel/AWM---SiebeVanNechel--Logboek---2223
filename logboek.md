@@ -13,3 +13,5 @@
 
 ## Week 3
 * Les 3 - 4 uur
+* Kotlin fundamentals 2-8
+* DiceRoller
